@@ -4,8 +4,9 @@ import Image from 'next/image'
 import logoImage from '@/app/assets/logo.svg'
 import Button from '../ui/button'
 import { twMerge } from 'tailwind-merge'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useScrollDirection } from '@/hooks/useScrollDirection'
 
 const navLinks = [
 	{ label: 'Home', href: '#' },
@@ -16,10 +17,24 @@ const navLinks = [
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false)
+  const scrollDirection = useScrollDirection()
+	const [isVisible, setIsVisible] = useState(false)
+
+	useEffect(() => {
+		if (scrollDirection === 'up') {
+			setIsVisible(true)
+		} else if (scrollDirection === 'down') {
+			setIsVisible(false)
+		}
+	}, [scrollDirection])
 
   return (
 		<>
-			<header className='py-4 lg:py-8 fixed w-full top-0 z-50'>
+			<header
+				className={`py-4 lg:py-8 fixed w-full top-0 z-50 transition-transform duration-300 ${
+					isVisible ? 'translate-y-0' : '-translate-y-full'
+				}`}
+			>
 				<div className='container mx-auto lg:max-w-5xl max-w-[300px] md:max-w-3xl'>
 					<div className='border border-white/15 rounded-[27px] md:rounded-full bg-neutral-950/70 backdrop-blur'>
 						<div className='grid grid-cols-2 lg:grid-cols-3 p-2 px-4 md:pr-2 items-center'>
@@ -122,9 +137,7 @@ export default function Navbar() {
 					</div>
 				</div>
 			</header>
-			<div className='pb-[86px] md:pb-[98px] lg:pb-[130px]'>
-
-			</div>
+			<div className='pb-[86px] md:pb-[98px] lg:pb-[130px]'></div>
 		</>
 	)
 }
