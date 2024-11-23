@@ -1,3 +1,5 @@
+'use client'
+
 import quantumLogo from '@/app/assets/quantum.svg'
 import acmeLogo from '@/app/assets/acme-corp.svg'
 import echoValleyLogo from '@/app/assets/echo-valley.svg'
@@ -7,6 +9,8 @@ import apexLogo from '@/app/assets/apex.svg'
 import celestialLogo from '@/app/assets/celestial.svg'
 import twiceLogo from '@/app/assets/twice.svg'
 import Image from 'next/image'
+import React, { Fragment } from 'react'
+import { motion } from 'framer-motion'
 
 const logos = [
 	{ name: 'Quantum', image: quantumLogo },
@@ -22,14 +26,30 @@ const logos = [
 export default function LogoTicker() {
 	return (
 		<section className='py-24 overflow-x-clip'>
-			<div className='container mx-auto lg:max-w-5xl max-w-[350px] md:max-w-3xl'>
-				<h3 className='text-center text-white/50 text-xl'>Already chosen by these market leaders</h3>
-				<div className='overflow-hidden mt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]'>
-					<div className='flex gap-24 pr-24'>
-						{logos.map((logo) => (
-							<Image src={logo.image} key={logo.name} alt={logo.name} />
+			<div className=''>
+				<h3 className='text-center text-white/50 text-xl'>
+					Already chosen by these market leaders
+				</h3>
+				<div className='flex overflow-hidden mt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]'>
+					<motion.div
+						animate={{
+							x: '-50%',
+						}}
+						transition={{
+							duration: 22,
+							ease: 'linear',
+							repeat: Infinity
+						}}
+						className='flex flex-none gap-24 pr-24'
+					>
+						{Array.from({ length: 2 }).map((_, idx) => (
+							<Fragment key={idx}>
+								{logos.map(logo => (
+									<Image src={logo.image} key={logo.name} alt={logo.name} />
+								))}
+							</Fragment>
 						))}
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</section>

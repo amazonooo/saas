@@ -5,7 +5,6 @@ import slackIcon from '@/app/assets/slack-logo.svg'
 import relumeIcon from '@/app/assets/relume-logo.svg'
 import framerIcon from '@/app/assets/framer-logo.svg'
 import githubIcon from '@/app/assets/github-logo.svg'
-import Image from 'next/image'
 import IntegrationColumn from '../ui/IntegrationColumn'
 
 const integrations = [
@@ -63,6 +62,7 @@ export default function Integrations() {
 							<IntegrationColumn integrations={integrations} />
 							<IntegrationColumn
 								integrations={integrations.slice().reverse()}
+								reverse
 								className='hidden md:flex'
 							/>
 						</div>

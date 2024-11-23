@@ -24,3 +24,18 @@ img {
   pointer-events: none;
   user-select: none;
 }
+
+::-webkit-scrollbar {
+  width: 0.7rem;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(228, 4%, 25%);
+  border-radius: 12px;
+  transition: all .4s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #A3E635;
+}
